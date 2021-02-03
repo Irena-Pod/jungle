@@ -11,37 +11,21 @@
 
   <h4>Order Summary</h4>
   <div class="panel panel-default items">
-    <table class="table table-bordered">
+    <table class="table thead-dark">
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Description</th>
+          <th colspan="2">Product</th>
           <th>Unit Price</th>
           <th>Quantity</th>
           <th>Total</th>
         </tr>
       </thead>
-
-  <tbody>
-       <% @order.line_items.each do |item| %>
-     <td>
-      <%= image_tag item.product.image.tiny %>
-      <%=  item.product.name %>
-    </td>
-      <td>
-      <%=  item.product.description %>
-    </td>
-     <td>
-      <%= humanized_money_with_symbol item.item_price_cents / 100.0 %>
-    </td>
-     <td>
-      <%=  item.quantity %>
-    </td>
-    <td>
-    <%= humanized_money_with_symbol item.quantity * (item.item_price_cents / 100.0) %>
-    </td>
-  </tbody>
-    <% end %>
+  
+  <% @order.line_items.each do |item| %>
+   <tbody>
+  <%= render 'item', item: item%>
+   </tbody>
+  <% end %>
     <tfoot>
         <tr>
           <th colspan="4">
@@ -53,10 +37,8 @@
         </tr>
       </tfoot>
 </table>
-
 </div>
 
-  
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
