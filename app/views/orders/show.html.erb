@@ -5,9 +5,58 @@
   </header>
 
   <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
+    <h3>Thank you for your order!</h3>
+    <p>The order confirmation email was sent to: <%= @order.email %><p>
   </div>
 
+  <h4>Order Summary</h4>
+  <div class="panel panel-default items">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Description</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+
+  <tbody>
+       <% @order.line_items.each do |item| %>
+     <td>
+      <%= image_tag item.product.image.tiny %>
+      <%=  item.product.name %>
+    </td>
+      <td>
+      <%=  item.product.description %>
+    </td>
+     <td>
+      <%= humanized_money_with_symbol item.item_price_cents / 100.0 %>
+    </td>
+     <td>
+      <%=  item.quantity %>
+    </td>
+    <td>
+    <%= humanized_money_with_symbol item.quantity * (item.item_price_cents / 100.0) %>
+    </td>
+  </tbody>
+    <% end %>
+    <tfoot>
+        <tr>
+          <th colspan="4">
+            TOTAL:
+          </th>
+          <th>
+            <%= humanized_money_with_symbol @order.total_cents / 100.0  %>
+          </th>
+        </tr>
+      </tfoot>
+</table>
+
+</div>
+
+  
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
