@@ -3,11 +3,22 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-
   def authenticate
     authenticate_or_request_with_http_basic do |user, password|
       user == ENV["ADMIN_USERNAME"] && password == ENV["ADMIN_PASSWORD"]
     end
+  end
+
+  # If user is logged-in, save object to a @current_user variable
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  
+  helper_method :current_user
+
+  # If user is not logged in, send to login page
+  def authorize
+    redirect_to '/login' unless current_user
   end
 
   private
@@ -26,7 +37,6 @@ class ApplicationController < ActionController::Base
     enhanced_cart.map {|entry| entry[:product].price_cents * entry[:quantity]}.sum
   end
   helper_method :cart_subtotal_cents
-
 
   def update_cart(new_cart)
     cookies[:cart] = {
