@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   describe 'Validations' do
-    it "a product with all four fields saves successfully" do
+    it "is valid if all product fields are completed" do
       new_cat = Category.create()
       product = new_cat.products.create(
         name: "Desk",
