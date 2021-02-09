@@ -1,10 +1,17 @@
 # Jungle
 
-A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
+A mini e-commerce application built with Rails 4.2.
+
+## Screenshots
+##### Homapage (user logged-in)
+!["Scheduler main view"](https://github.com/Irena-Pod/jungle/blob/master/docs/Homepage_with_user_logged-in.png?raw=true)
+##### My Cart
+!["Scheduler main view"](https://github.com/Irena-Pod/jungle/blob/master/docs/My_cart_logged-in_user.png?raw=true)
+##### Admin >> All Prdocuts page
+!["Scheduler main view"](https://github.com/Irena-Pod/jungle/blob/master/docs/Admin_products_page.png?raw=true)
 
 
 ## Setup
-
 1. Run `bundle install` to install dependencies
 2. Create `config/database.yml` by copying `config/database.example.yml`
 3. Create `config/secrets.yml` by copying `config/secrets.example.yml`
